@@ -1,0 +1,11 @@
+[package]
+name = "venti"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = "4.5.13"
+logos = "0.14.1"
+inkwell = { version = "0.4.0" }
+llvm-sys = "181.1.1"
+

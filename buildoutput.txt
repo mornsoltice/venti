@@ -1,0 +1,1647 @@
+   Compiling llvm-sys v130.1.2
+   Compiling inkwell v0.4.0
+error: failed to run custom build command for `llvm-sys v130.1.2`
+
+Caused by:
+  process didn't exit successfully: `/home/soltice/Development/venti/target/debug/build/llvm-sys-4da55d8940f861af/build-script-build` (exit status: 101)
+  --- stdout
+  cargo:rerun-if-env-changed=LLVM_SYS_130_PREFIX
+  cargo:rerun-if-env-changed=LLVM_SYS_130_IGNORE_BLOCKLIST
+  cargo:rerun-if-env-changed=LLVM_SYS_130_STRICT_VERSIONING
+  cargo:rerun-if-env-changed=LLVM_SYS_130_NO_CLEAN_CFLAGS
+  cargo:rerun-if-env-changed=LLVM_SYS_130_USE_DEBUG_MSVCRT
+  cargo:rerun-if-env-changed=LLVM_SYS_130_FFI_WORKAROUND
+  OUT_DIR = Some(/home/soltice/Development/venti/target/debug/build/llvm-sys-8b29704c66155a63/out)
+  TARGET = Some(x86_64-unknown-linux-gnu)
+  OPT_LEVEL = Some(0)
+  HOST = Some(x86_64-unknown-linux-gnu)
+  cargo:rerun-if-env-changed=CC_x86_64-unknown-linux-gnu
+  CC_x86_64-unknown-linux-gnu = None
+  cargo:rerun-if-env-changed=CC_x86_64_unknown_linux_gnu
+  CC_x86_64_unknown_linux_gnu = None
+  cargo:rerun-if-env-changed=HOST_CC
+  HOST_CC = None
+  cargo:rerun-if-env-changed=CC
+  CC = None
+  cargo:rerun-if-env-changed=CC_ENABLE_DEBUG_OUTPUT
+  RUSTC_WRAPPER = None
+  cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+  CRATE_CC_NO_DEFAULTS = None
+  DEBUG = Some(true)
+  CARGO_CFG_TARGET_FEATURE = Some(fxsr,sse,sse2)
+  cargo:rerun-if-env-changed=CFLAGS_x86_64-unknown-linux-gnu
+  CFLAGS_x86_64-unknown-linux-gnu = None
+  cargo:rerun-if-env-changed=CFLAGS_x86_64_unknown_linux_gnu
+  CFLAGS_x86_64_unknown_linux_gnu = None
+  cargo:rerun-if-env-changed=HOST_CFLAGS
+  HOST_CFLAGS = None
+  cargo:rerun-if-env-changed=CFLAGS
+  CFLAGS = Some(-I/usr/include  -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS )
+  cargo:rerun-if-env-changed=AR_x86_64-unknown-linux-gnu
+  AR_x86_64-unknown-linux-gnu = None
+  cargo:rerun-if-env-changed=AR_x86_64_unknown_linux_gnu
+  AR_x86_64_unknown_linux_gnu = None
+  cargo:rerun-if-env-changed=HOST_AR
+  HOST_AR = None
+  cargo:rerun-if-env-changed=AR
+  AR = None
+  cargo:rerun-if-env-changed=ARFLAGS_x86_64-unknown-linux-gnu
+  ARFLAGS_x86_64-unknown-linux-gnu = None
+  cargo:rerun-if-env-changed=ARFLAGS_x86_64_unknown_linux_gnu
+  ARFLAGS_x86_64_unknown_linux_gnu = None
+  cargo:rerun-if-env-changed=HOST_ARFLAGS
+  HOST_ARFLAGS = None
+  cargo:rerun-if-env-changed=ARFLAGS
+  ARFLAGS = None
+  cargo:rustc-link-lib=static=targetwrappers
+  cargo:rustc-link-search=native=/home/soltice/Development/venti/target/debug/build/llvm-sys-8b29704c66155a63/out
+  cargo:config_path=llvm-config
+  cargo:libdir=/usr/lib
+
+  cargo:rustc-link-search=native=/usr/lib
+
+
+  --- stderr
+  thread 'main' panicked at /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/llvm-sys-130.1.2/build.rs:434:5:
+  failed to get link libraries from llvm-config: [("static", Custom { kind: Other, error: "llvm-config failed with error code Some(1)" })]
+  note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+warning: build failed, waiting for other jobs to finish...
+error: One of the LLVM feature flags must be provided: llvm4-0 llvm5-0 llvm6-0 llvm7-0 llvm8-0 llvm9-0 llvm10-0 llvm11-0 llvm12-0 llvm13-0 llvm14-0 llvm15-0 llvm16-0 llvm17-0 
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/lib.rs:101:9
+    |
+101 |           compile_error!(concat!("One of the LLVM feature flags must be provided: ", $($all, " "),*));
+    |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+112 | / assert_unique_used_features! {
+113 | |     "llvm4-0",
+114 | |     "llvm5-0",
+115 | |     "llvm6-0",
+...   |
+126 | |     "llvm17-0"
+127 | | }
+    | |_- in this macro invocation
+    |
+    = note: this error originates in the macro `assert_used_features` which comes from the expansion of the macro `assert_unique_used_features` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/support/error_handling.rs:4:5
+  |
+4 | use llvm_sys::core::{LLVMGetDiagInfoDescription, LLVMGetDiagInfoSeverity};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/support/error_handling.rs:5:5
+  |
+5 | use llvm_sys::error_handling::{LLVMInstallFatalErrorHandler, LLVMResetFatalErrorHandler};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/support/error_handling.rs:6:5
+  |
+6 | use llvm_sys::prelude::LLVMDiagnosticInfoRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/support/mod.rs:7:5
+  |
+7 | use llvm_sys::core::{LLVMCreateMessage, LLVMDisposeMessage};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/support/mod.rs:8:5
+  |
+8 | use llvm_sys::error_handling::LLVMEnablePrettyStackTrace;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/support/mod.rs:9:5
+  |
+9 | use llvm_sys::support::{LLVMLoadLibraryPermanently, LLVMSearchForAddressOfSymbol};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/support/mod.rs:124:9
+    |
+124 |     use llvm_sys::core::LLVMShutdown;
+    |         ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/support/mod.rs:202:9
+    |
+202 |     use llvm_sys::core::LLVMIsMultithreaded;
+    |         ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/attributes.rs:3:5
+  |
+3 | use llvm_sys::core::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/attributes.rs:9:5
+  |
+9 | use llvm_sys::prelude::LLVMAttributeRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/basic_block.rs:3:5
+  |
+3 | use llvm_sys::core::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/basic_block.rs:10:5
+   |
+10 | use llvm_sys::prelude::{LLVMBasicBlockRef, LLVMValueRef};
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/basic_block.rs:479:17
+    |
+479 |             use llvm_sys::core::LLVMSetValueName2;
+    |                 ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/builder.rs:3:5
+  |
+3 | use llvm_sys::core::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/builder.rs:35:5
+   |
+35 | use llvm_sys::prelude::{LLVMBuilderRef, LLVMValueRef};
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/comdat.rs:5:5
+  |
+5 | use llvm_sys::comdat::{LLVMComdatSelectionKind, LLVMGetComdatSelectionKind, LLVMSetComdatSelectionKind};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/comdat.rs:6:5
+  |
+6 | use llvm_sys::prelude::LLVMComdatRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/context.rs:16:5
+   |
+16 | use llvm_sys::core::{
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/context.rs:26:5
+   |
+26 | use llvm_sys::ir_reader::LLVMParseIRInContext;
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/context.rs:27:5
+   |
+27 | use llvm_sys::prelude::{LLVMContextRef, LLVMDiagnosticInfoRef, LLVMTypeRef, LLVMValueRef};
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/context.rs:28:5
+   |
+28 | use llvm_sys::target::{LLVMIntPtrTypeForASInContext, LLVMIntPtrTypeInContext};
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:110:5
+    |
+110 | use llvm_sys::core::LLVMMetadataAsValue;
+    |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:113:9
+    |
+113 | pub use llvm_sys::debuginfo::LLVMDWARFTypeEncoding;
+    |         ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:114:5
+    |
+114 | use llvm_sys::debuginfo::LLVMDebugMetadataVersion;
+    |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:115:5
+    |
+115 | use llvm_sys::debuginfo::LLVMDisposeDIBuilder;
+    |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:116:5
+    |
+116 | use llvm_sys::debuginfo::LLVMMetadataReplaceAllUsesWith;
+    |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:117:5
+    |
+117 | use llvm_sys::debuginfo::LLVMTemporaryMDNode;
+    |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:118:5
+    |
+118 | use llvm_sys::debuginfo::{LLVMCreateDIBuilder, LLVMCreateDIBuilderDisallowUnresolved};
+    |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:119:5
+    |
+119 | use llvm_sys::debuginfo::{
+    |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:132:5
+    |
+132 | use llvm_sys::prelude::{LLVMDIBuilderRef, LLVMMetadataRef};
+    |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1374:13
+     |
+1374 |     pub use llvm_sys::debuginfo::LLVMDIFlags as DIFlags;
+     |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1375:9
+     |
+1375 |     use llvm_sys::debuginfo::{LLVMDWARFEmissionKind, LLVMDWARFSourceLanguage};
+     |         ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/execution_engine.rs:2:5
+  |
+2 | use llvm_sys::execution_engine::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/intrinsics.rs:3:5
+  |
+3 | use llvm_sys::prelude::LLVMTypeRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/memory_buffer.rs:1:5
+  |
+1 | use llvm_sys::core::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/memory_buffer.rs:6:5
+  |
+6 | use llvm_sys::object::LLVMCreateObjectFile;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/memory_buffer.rs:7:5
+  |
+7 | use llvm_sys::prelude::LLVMMemoryBufferRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/module.rs:3:5
+  |
+3 | use llvm_sys::analysis::{LLVMVerifierFailureAction, LLVMVerifyModule};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/module.rs:5:5
+  |
+5 | use llvm_sys::bit_reader::LLVMParseBitcodeInContext;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/module.rs:6:5
+  |
+6 | use llvm_sys::bit_writer::{LLVMWriteBitcodeToFile, LLVMWriteBitcodeToMemoryBuffer};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/module.rs:10:5
+   |
+10 | use llvm_sys::core::{
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/module.rs:21:5
+   |
+21 | use llvm_sys::execution_engine::{
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/module.rs:24:5
+   |
+24 | use llvm_sys::prelude::{LLVMModuleRef, LLVMValueRef};
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0432]: unresolved import `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/support/error_handling.rs:7:5
+  |
+7 | use llvm_sys::LLVMDiagnosticSeverity;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/module.rs:682:17
+    |
+682 |             use llvm_sys::bit_writer::LLVMWriteBitcodeToFD;
+    |                 ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/module.rs:748:17
+    |
+748 |             use llvm_sys::core::LLVMGetDataLayoutStr;
+    |                 ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/module.rs:868:17
+    |
+868 |             use llvm_sys::core::LLVMSetModuleInlineAsm2;
+    |                 ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/module.rs:1302:13
+     |
+1302 |         use llvm_sys::linker::LLVMLinkModules2;
+     |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/object_file.rs:1:5
+  |
+1 | use llvm_sys::object::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/passes.rs:3:5
+  |
+3 | use llvm_sys::core::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/passes.rs:15:5
+   |
+15 | use llvm_sys::prelude::LLVMPassManagerRef;
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:1:5
+  |
+1 | use llvm_sys::target::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:10:5
+   |
+10 | use llvm_sys::target_machine::{
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:164:13
+    |
+164 |         use llvm_sys::target::{
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:202:13
+    |
+202 |         use llvm_sys::target::{
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:240:13
+    |
+240 |         use llvm_sys::target::{
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:278:13
+    |
+278 |         use llvm_sys::target::{
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:352:13
+    |
+352 |         use llvm_sys::target::{
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:390:13
+    |
+390 |         use llvm_sys::target::{
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:425:13
+    |
+425 |         use llvm_sys::target::{
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:457:13
+    |
+457 |         use llvm_sys::target::{
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:489:13
+    |
+489 |         use llvm_sys::target::{
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:524:13
+    |
+524 |         use llvm_sys::target::{
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:562:13
+    |
+562 |         use llvm_sys::target::{
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:600:13
+    |
+600 |         use llvm_sys::target::{
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:623:17
+    |
+623 |             use llvm_sys::target::LLVMInitializeBPFDisassembler;
+    |                 ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:798:13
+    |
+798 |         use llvm_sys::target::{
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:844:13
+    |
+844 |         use llvm_sys::target::{
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/array_type.rs:1:5
+  |
+1 | use llvm_sys::core::{LLVMConstArray, LLVMGetArrayLength};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/array_type.rs:2:5
+  |
+2 | use llvm_sys::prelude::{LLVMTypeRef, LLVMValueRef};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/enums.rs:1:5
+  |
+1 | use llvm_sys::core::LLVMGetTypeKind;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/enums.rs:2:5
+  |
+2 | use llvm_sys::prelude::LLVMTypeRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0432]: unresolved import `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/module.rs:27:5
+   |
+27 | use llvm_sys::LLVMLinkage;
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/float_type.rs:1:5
+  |
+1 | use llvm_sys::core::{LLVMConstArray, LLVMConstReal, LLVMConstRealOfStringAndSize};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/float_type.rs:2:5
+  |
+2 | use llvm_sys::execution_engine::LLVMCreateGenericValueOfFloat;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/float_type.rs:3:5
+  |
+3 | use llvm_sys::prelude::{LLVMTypeRef, LLVMValueRef};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/fn_type.rs:1:5
+  |
+1 | use llvm_sys::core::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/fn_type.rs:4:5
+  |
+4 | use llvm_sys::prelude::LLVMTypeRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0432]: unresolved import `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/enums.rs:3:5
+  |
+3 | use llvm_sys::LLVMTypeKind;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/int_type.rs:1:5
+  |
+1 | use llvm_sys::core::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/int_type.rs:5:5
+  |
+5 | use llvm_sys::execution_engine::LLVMCreateGenericValueOfInt;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/int_type.rs:6:5
+  |
+6 | use llvm_sys::prelude::{LLVMTypeRef, LLVMValueRef};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/metadata_type.rs:1:5
+  |
+1 | use llvm_sys::prelude::LLVMTypeRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/ptr_type.rs:1:5
+  |
+1 | use llvm_sys::core::{LLVMConstArray, LLVMGetPointerAddressSpace};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/ptr_type.rs:2:5
+  |
+2 | use llvm_sys::prelude::{LLVMTypeRef, LLVMValueRef};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/struct_type.rs:1:5
+  |
+1 | use llvm_sys::core::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/struct_type.rs:5:5
+  |
+5 | use llvm_sys::prelude::{LLVMTypeRef, LLVMValueRef};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/traits.rs:1:5
+  |
+1 | use llvm_sys::prelude::LLVMTypeRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/vec_type.rs:1:5
+  |
+1 | use llvm_sys::core::{LLVMConstArray, LLVMConstVector, LLVMGetVectorSize};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/vec_type.rs:2:5
+  |
+2 | use llvm_sys::prelude::{LLVMTypeRef, LLVMValueRef};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/void_type.rs:1:5
+  |
+1 | use llvm_sys::prelude::LLVMTypeRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/mod.rs:41:5
+   |
+41 | use llvm_sys::core::{
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/mod.rs:46:5
+   |
+46 | use llvm_sys::prelude::{LLVMTypeRef, LLVMValueRef};
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0432]: unresolved import `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/fn_type.rs:5:5
+  |
+5 | use llvm_sys::LLVMTypeKind;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/array_value.rs:1:5
+  |
+1 | use llvm_sys::core::{LLVMGetAsString, LLVMIsAConstantArray, LLVMIsAConstantDataArray, LLVMIsConstantString};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/array_value.rs:2:5
+  |
+2 | use llvm_sys::prelude::LLVMValueRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/basic_value_use.rs:5:5
+  |
+5 | use llvm_sys::core::{LLVMGetNextUse, LLVMGetUsedValue, LLVMGetUser, LLVMIsABasicBlock, LLVMValueAsBasicBlock};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/basic_value_use.rs:6:5
+  |
+6 | use llvm_sys::prelude::LLVMUseRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/call_site_value.rs:4:5
+  |
+4 | use llvm_sys::core::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/call_site_value.rs:8:5
+  |
+8 | use llvm_sys::prelude::LLVMValueRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0432]: unresolved import `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/mod.rs:47:5
+   |
+47 | use llvm_sys::LLVMTypeKind;
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/call_site_value.rs:140:13
+    |
+140 |         use llvm_sys::core::LLVMAddCallSiteAttribute;
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/call_site_value.rs:169:13
+    |
+169 |         use llvm_sys::core::LLVMGetCalledValue;
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/call_site_value.rs:202:13
+    |
+202 |         use llvm_sys::core::LLVMGetCallSiteAttributeCount;
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/call_site_value.rs:235:13
+    |
+235 |         use llvm_sys::core::LLVMGetCallSiteAttributes;
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/call_site_value.rs:294:13
+    |
+294 |         use llvm_sys::core::LLVMGetCallSiteEnumAttribute;
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/call_site_value.rs:334:13
+    |
+334 |         use llvm_sys::core::LLVMGetCallSiteStringAttribute;
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/call_site_value.rs:381:13
+    |
+381 |         use llvm_sys::core::LLVMRemoveCallSiteEnumAttribute;
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/call_site_value.rs:415:13
+    |
+415 |         use llvm_sys::core::LLVMRemoveCallSiteStringAttribute;
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/call_site_value.rs:452:13
+    |
+452 |         use llvm_sys::core::LLVMGetNumArgOperands;
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/enums.rs:1:5
+  |
+1 | use llvm_sys::core::{LLVMGetTypeKind, LLVMGetValueKind, LLVMIsAInstruction, LLVMTypeOf};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/enums.rs:2:5
+  |
+2 | use llvm_sys::prelude::LLVMValueRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0432]: unresolved import `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/call_site_value.rs:9:5
+  |
+9 | use llvm_sys::LLVMTypeKind;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/float_value.rs:3:5
+  |
+3 | use llvm_sys::core::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/float_value.rs:7:5
+  |
+7 | use llvm_sys::prelude::LLVMValueRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/fn_value.rs:1:5
+  |
+1 | use llvm_sys::analysis::{LLVMVerifierFailureAction, LLVMVerifyFunction, LLVMViewFunctionCFG, LLVMViewFunctionCFGOnly};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/fn_value.rs:2:5
+  |
+2 | use llvm_sys::core::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/fn_value.rs:6:5
+  |
+6 | use llvm_sys::core::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/fn_value.rs:12:5
+   |
+12 | use llvm_sys::core::{LLVMGetPersonalityFn, LLVMSetPersonalityFn};
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/fn_value.rs:15:5
+   |
+15 | use llvm_sys::prelude::{LLVMBasicBlockRef, LLVMValueRef};
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/fn_value.rs:226:13
+    |
+226 |         use llvm_sys::core::LLVMHasPersonalityFn;
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/fn_value.rs:340:13
+    |
+340 |         use llvm_sys::core::LLVMGetAttributesAtIndex;
+    |             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/generic_value.rs:2:5
+  |
+2 | use llvm_sys::execution_engine::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:23:5
+   |
+23 | use llvm_sys::prelude::LLVMValueRef;
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0432]: unresolved import `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/enums.rs:3:5
+  |
+3 | use llvm_sys::{LLVMTypeKind, LLVMValueKind};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/instruction_value.rs:5:5
+  |
+5 | use llvm_sys::core::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/instruction_value.rs:13:5
+   |
+13 | use llvm_sys::core::{LLVMGetOrdering, LLVMSetOrdering};
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/instruction_value.rs:16:5
+   |
+16 | use llvm_sys::prelude::LLVMValueRef;
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0432]: unresolved import `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:24:5
+   |
+24 | use llvm_sys::LLVMThreadLocalMode;
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/int_value.rs:3:5
+  |
+3 | use llvm_sys::core::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/int_value.rs:11:5
+   |
+11 | use llvm_sys::prelude::LLVMValueRef;
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/metadata_value.rs:1:5
+  |
+1 | use llvm_sys::core::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/metadata_value.rs:4:5
+  |
+4 | use llvm_sys::prelude::LLVMValueRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/phi_value.rs:1:5
+  |
+1 | use llvm_sys::core::{LLVMAddIncoming, LLVMCountIncoming, LLVMGetIncomingBlock, LLVMGetIncomingValue};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/phi_value.rs:2:5
+  |
+2 | use llvm_sys::prelude::{LLVMBasicBlockRef, LLVMValueRef};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/ptr_value.rs:6:5
+  |
+6 | use llvm_sys::core::{LLVMConstAddrSpaceCast, LLVMConstPointerCast, LLVMConstPtrToInt};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/ptr_value.rs:7:5
+  |
+7 | use llvm_sys::prelude::LLVMValueRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/struct_value.rs:1:5
+  |
+1 | use llvm_sys::core::{LLVMGetNumOperands, LLVMGetOperand, LLVMSetOperand};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/struct_value.rs:3:5
+  |
+3 | use llvm_sys::prelude::LLVMValueRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/traits.rs:1:5
+  |
+1 | use llvm_sys::prelude::LLVMValueRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/vec_value.rs:3:5
+  |
+3 | use llvm_sys::core::{
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/vec_value.rs:7:5
+  |
+7 | use llvm_sys::prelude::LLVMValueRef;
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+ --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/callable_value.rs:9:5
+  |
+9 | use llvm_sys::core::{LLVMGetElementType, LLVMGetTypeKind, LLVMTypeOf};
+  |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/callable_value.rs:10:5
+   |
+10 | use llvm_sys::prelude::LLVMTypeRef;
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/callable_value.rs:11:5
+   |
+11 | use llvm_sys::prelude::LLVMValueRef;
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0432]: unresolved import `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/instruction_value.rs:17:5
+   |
+17 | use llvm_sys::LLVMOpcode;
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0432]: unresolved import `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/callable_value.rs:12:5
+   |
+12 | use llvm_sys::LLVMTypeKind;
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/mod.rs:52:5
+   |
+52 | use llvm_sys::core::{
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/mod.rs:56:5
+   |
+56 | use llvm_sys::prelude::{LLVMTypeRef, LLVMValueRef};
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/mod.rs:120:17
+    |
+120 |             use llvm_sys::core::LLVMSetValueName2;
+    |                 ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/mod.rs:137:17
+    |
+137 |             use llvm_sys::core::LLVMGetValueName2;
+    |                 ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0432]: unresolved import `crate::values::metadata_value::FIRST_CUSTOM_METADATA_KIND_ID`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/mod.rs:42:56
+   |
+42 | pub use crate::values::metadata_value::{MetadataValue, FIRST_CUSTOM_METADATA_KIND_ID};
+   |                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ no `FIRST_CUSTOM_METADATA_KIND_ID` in `values::metadata_value`
+   |
+note: found an item that was configured out
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/metadata_value.rs:24:11
+   |
+24 | pub const FIRST_CUSTOM_METADATA_KIND_ID: u32 = 22;
+   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   = note: the item is gated behind the `llvm4-0` feature
+note: found an item that was configured out
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/metadata_value.rs:26:11
+   |
+26 | pub const FIRST_CUSTOM_METADATA_KIND_ID: u32 = 23;
+   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   = note: the item is gated behind the `llvm5-0` feature
+note: found an item that was configured out
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/metadata_value.rs:28:11
+   |
+28 | pub const FIRST_CUSTOM_METADATA_KIND_ID: u32 = 25;
+   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: found an item that was configured out
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/metadata_value.rs:30:11
+   |
+30 | pub const FIRST_CUSTOM_METADATA_KIND_ID: u32 = 26;
+   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   = note: the item is gated behind the `llvm8-0` feature
+note: found an item that was configured out
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/metadata_value.rs:32:11
+   |
+32 | pub const FIRST_CUSTOM_METADATA_KIND_ID: u32 = 28;
+   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   = note: the item is gated behind the `llvm9-0` feature
+note: found an item that was configured out
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/metadata_value.rs:34:11
+   |
+34 | pub const FIRST_CUSTOM_METADATA_KIND_ID: u32 = 30;
+   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: found an item that was configured out
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/metadata_value.rs:36:11
+   |
+36 | pub const FIRST_CUSTOM_METADATA_KIND_ID: u32 = 31;
+   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: found an item that was configured out
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/metadata_value.rs:38:11
+   |
+38 | pub const FIRST_CUSTOM_METADATA_KIND_ID: u32 = 36;
+   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: found an item that was configured out
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/metadata_value.rs:40:11
+   |
+40 | pub const FIRST_CUSTOM_METADATA_KIND_ID: u32 = 39;
+   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0432]: unresolved import `llvm_sys`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/lib.rs:73:5
+   |
+73 | use llvm_sys::{
+   |     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1425:31
+     |
+1425 |         const ZERO: DIFlags = llvm_sys::debuginfo::LLVMDIFlagZero;
+     |                               ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1426:34
+     |
+1426 |         const PRIVATE: DIFlags = llvm_sys::debuginfo::LLVMDIFlagPrivate;
+     |                                  ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1427:36
+     |
+1427 |         const PROTECTED: DIFlags = llvm_sys::debuginfo::LLVMDIFlagProtected;
+     |                                    ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1428:33
+     |
+1428 |         const PUBLIC: DIFlags = llvm_sys::debuginfo::LLVMDIFlagPublic;
+     |                                 ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1429:35
+     |
+1429 |         const FWD_DECL: DIFlags = llvm_sys::debuginfo::LLVMDIFlagFwdDecl;
+     |                                   ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1430:38
+     |
+1430 |         const APPLE_BLOCK: DIFlags = llvm_sys::debuginfo::LLVMDIFlagAppleBlock;
+     |                                      ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1433:34
+     |
+1433 |         const VIRTUAL: DIFlags = llvm_sys::debuginfo::LLVMDIFlagVirtual;
+     |                                  ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1434:37
+     |
+1434 |         const ARTIFICIAL: DIFlags = llvm_sys::debuginfo::LLVMDIFlagArtificial;
+     |                                     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1435:35
+     |
+1435 |         const EXPLICIT: DIFlags = llvm_sys::debuginfo::LLVMDIFlagExplicit;
+     |                                   ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1436:37
+     |
+1436 |         const PROTOTYPED: DIFlags = llvm_sys::debuginfo::LLVMDIFlagPrototyped;
+     |                                     ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1437:46
+     |
+1437 |         const OBJC_CLASS_COMPLETE: DIFlags = llvm_sys::debuginfo::LLVMDIFlagObjcClassComplete;
+     |                                              ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1438:41
+     |
+1438 |         const OBJECT_POINTER: DIFlags = llvm_sys::debuginfo::LLVMDIFlagObjectPointer;
+     |                                         ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1439:33
+     |
+1439 |         const VECTOR: DIFlags = llvm_sys::debuginfo::LLVMDIFlagVector;
+     |                                 ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1440:40
+     |
+1440 |         const STATIC_MEMBER: DIFlags = llvm_sys::debuginfo::LLVMDIFlagStaticMember;
+     |                                        ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1441:43
+     |
+1441 |         const LVALUE_REFERENCE: DIFlags = llvm_sys::debuginfo::LLVMDIFlagLValueReference;
+     |                                           ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1442:43
+     |
+1442 |         const RVALUE_REFERENCE: DIFlags = llvm_sys::debuginfo::LLVMDIFlagRValueReference;
+     |                                           ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1443:35
+     |
+1443 |         const RESERVED: DIFlags = llvm_sys::debuginfo::LLVMDIFlagReserved;
+     |                                   ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1444:45
+     |
+1444 |         const SINGLE_INHERITANCE: DIFlags = llvm_sys::debuginfo::LLVMDIFlagSingleInheritance;
+     |                                             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1445:47
+     |
+1445 |         const MULTIPLE_INHERITANCE: DIFlags = llvm_sys::debuginfo::LLVMDIFlagMultipleInheritance;
+     |                                               ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1446:46
+     |
+1446 |         const VIRTUAL_INHERITANCE: DIFlags = llvm_sys::debuginfo::LLVMDIFlagVirtualInheritance;
+     |                                              ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1447:45
+     |
+1447 |         const INTRODUCED_VIRTUAL: DIFlags = llvm_sys::debuginfo::LLVMDIFlagIntroducedVirtual;
+     |                                             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1448:36
+     |
+1448 |         const BIT_FIELD: DIFlags = llvm_sys::debuginfo::LLVMDIFlagBitField;
+     |                                    ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1449:36
+     |
+1449 |         const NO_RETURN: DIFlags = llvm_sys::debuginfo::LLVMDIFlagNoReturn;
+     |                                    ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1452:45
+     |
+1452 |         const TYPE_PASS_BY_VALUE: DIFlags = llvm_sys::debuginfo::LLVMDIFlagTypePassByValue;
+     |                                             ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1453:49
+     |
+1453 |         const TYPE_PASS_BY_REFERENCE: DIFlags = llvm_sys::debuginfo::LLVMDIFlagTypePassByReference;
+     |                                                 ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1458:32
+     |
+1458 |         const THUNK: DIFlags = llvm_sys::debuginfo::LLVMDIFlagThunk;
+     |                                ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `llvm_sys`
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/debug_info.rs:1469:48
+     |
+1469 |         const INDIRECT_VIRTUAL_BASE: DIFlags = llvm_sys::debuginfo::LLVMDIFlagIndirectVirtualBase;
+     |                                                ^^^^^^^^ use of undeclared crate or module `llvm_sys`
+
+error[E0412]: cannot find type `InlineAsmDialect` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/context.rs:116:13
+    |
+116 |             InlineAsmDialect,
+    |             ^^^^^^^^^^^^^^^^ not found in this scope
+    |
+help: you might be missing a type parameter
+    |
+74  | impl<InlineAsmDialect> ContextImpl {
+    |     ++++++++++++++++++
+
+error[E0412]: cannot find type `InlineAsmDialect` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/context.rs:586:13
+    |
+586 |             InlineAsmDialect,
+    |             ^^^^^^^^^^^^^^^^ not found in this scope
+    |
+help: you might be missing a type parameter
+    |
+409 | impl<InlineAsmDialect> Context {
+    |     ++++++++++++++++++
+
+error[E0412]: cannot find type `InlineAsmDialect` in this scope
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/context.rs:1434:13
+     |
+1434 |             InlineAsmDialect,
+     |             ^^^^^^^^^^^^^^^^ not found in this scope
+     |
+help: you might be missing a type parameter
+     |
+1293 | impl<'ctx, InlineAsmDialect> ContextRef<'ctx> {
+     |          ++++++++++++++++++
+
+error[E0046]: not all trait items implemented, missing: `as_type_ref`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/metadata_type.rs:70:1
+   |
+70 | unsafe impl AsTypeRef for MetadataType<'_> {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ missing `as_type_ref` in implementation
+   |
+  ::: /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/traits.rs:14:5
+   |
+14 |     fn as_type_ref(&self) -> LLVMTypeRef;
+   |     ------------------------------------- `as_type_ref` from trait
+
+error[E0599]: no method named `get_enum_kind_id` found for reference `&Attribute` in the current scope
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/attributes.rs:40:41
+   |
+40 |                 .field("kind_id", &self.get_enum_kind_id())
+   |                                         ^^^^^^^^^^^^^^^^
+   |
+help: there is a method `get_string_kind_id` with a similar name
+   |
+40 |                 .field("kind_id", &self.get_string_kind_id())
+   |                                         ~~~~~~~~~~~~~~~~~~
+
+error[E0599]: no method named `is_type` found for reference `&Attribute` in the current scope
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/attributes.rs:45:17
+   |
+45 |         if self.is_type() {
+   |                 ^^^^^^^ method not found in `&Attribute`
+
+error[E0599]: no method named `get_enum_kind_id` found for reference `&Attribute` in the current scope
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/attributes.rs:49:41
+   |
+49 |                 .field("kind_id", &self.get_enum_kind_id())
+   |                                         ^^^^^^^^^^^^^^^^
+   |
+help: there is a method `get_string_kind_id` with a similar name
+   |
+49 |                 .field("kind_id", &self.get_string_kind_id())
+   |                                         ~~~~~~~~~~~~~~~~~~
+
+error[E0599]: no method named `get_type_value` found for reference `&Attribute` in the current scope
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/attributes.rs:50:39
+   |
+50 |                 .field("value", &self.get_type_value())
+   |                                       ^^^^^^^^^^^^^^
+   |
+help: there is a method `get_enum_value` with a similar name
+   |
+50 |                 .field("value", &self.get_enum_value())
+   |                                       ~~~~~~~~~~~~~~
+
+error[E0599]: no method named `get_enum_kind_id` found for reference `&Attribute` in the current scope
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/attributes.rs:66:25
+   |
+66 |             return self.get_enum_kind_id() == other.get_enum_kind_id()
+   |                         ^^^^^^^^^^^^^^^^
+   |
+help: there is a method `get_string_kind_id` with a similar name
+   |
+66 |             return self.get_string_kind_id() == other.get_enum_kind_id()
+   |                         ~~~~~~~~~~~~~~~~~~
+
+error[E0599]: no method named `get_enum_kind_id` found for reference `&Attribute` in the current scope
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/attributes.rs:66:53
+   |
+66 |             return self.get_enum_kind_id() == other.get_enum_kind_id()
+   |                                                     ^^^^^^^^^^^^^^^^
+   |
+help: there is a method `get_string_kind_id` with a similar name
+   |
+66 |             return self.get_enum_kind_id() == other.get_string_kind_id()
+   |                                                     ~~~~~~~~~~~~~~~~~~
+
+error[E0599]: no method named `is_type` found for reference `&Attribute` in the current scope
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/attributes.rs:75:17
+   |
+75 |         if self.is_type() && other.is_type() {
+   |                 ^^^^^^^ method not found in `&Attribute`
+
+error[E0599]: no method named `is_type` found for reference `&Attribute` in the current scope
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/attributes.rs:75:36
+   |
+75 |         if self.is_type() && other.is_type() {
+   |                                    ^^^^^^^ method not found in `&Attribute`
+
+error[E0599]: no method named `get_enum_kind_id` found for reference `&Attribute` in the current scope
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/attributes.rs:76:25
+   |
+76 |             return self.get_enum_kind_id() == other.get_enum_kind_id()
+   |                         ^^^^^^^^^^^^^^^^
+   |
+help: there is a method `get_string_kind_id` with a similar name
+   |
+76 |             return self.get_string_kind_id() == other.get_enum_kind_id()
+   |                         ~~~~~~~~~~~~~~~~~~
+
+error[E0599]: no method named `get_enum_kind_id` found for reference `&Attribute` in the current scope
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/attributes.rs:76:53
+   |
+76 |             return self.get_enum_kind_id() == other.get_enum_kind_id()
+   |                                                     ^^^^^^^^^^^^^^^^
+   |
+help: there is a method `get_string_kind_id` with a similar name
+   |
+76 |             return self.get_enum_kind_id() == other.get_string_kind_id()
+   |                                                     ~~~~~~~~~~~~~~~~~~
+
+error[E0599]: no method named `get_type_value` found for reference `&Attribute` in the current scope
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/attributes.rs:77:25
+   |
+77 |                 && self.get_type_value() == other.get_type_value();
+   |                         ^^^^^^^^^^^^^^
+   |
+help: there is a method `get_enum_value` with a similar name
+   |
+77 |                 && self.get_enum_value() == other.get_type_value();
+   |                         ~~~~~~~~~~~~~~
+
+error[E0599]: no method named `get_type_value` found for reference `&Attribute` in the current scope
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/attributes.rs:77:51
+   |
+77 |                 && self.get_type_value() == other.get_type_value();
+   |                                                   ^^^^^^^^^^^^^^
+   |
+help: there is a method `get_enum_value` with a similar name
+   |
+77 |                 && self.get_type_value() == other.get_enum_value();
+   |                                                   ~~~~~~~~~~~~~~
+
+error[E0599]: no method named `get_element_type` found for struct `ptr_type::PointerType` in the current scope
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/builder.rs:3260:27
+     |
+3260 |         if ptr.get_type().get_element_type() != value.get_type().into() {
+     |                           ^^^^^^^^^^^^^^^^ method not found in `PointerType<'_>`
+     |
+    ::: /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/ptr_type.rs:18:1
+     |
+18   | pub struct PointerType<'ctx> {
+     | ---------------------------- method `get_element_type` not found for this struct
+
+error[E0599]: no method named `get_element_type` found for struct `ptr_type::PointerType` in the current scope
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/builder.rs:3338:27
+     |
+3338 |         if ptr.get_type().get_element_type().to_basic_type_enum() != cmp.get_type() {
+     |                           ^^^^^^^^^^^^^^^^ method not found in `PointerType<'_>`
+     |
+    ::: /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/ptr_type.rs:18:1
+     |
+18   | pub struct PointerType<'ctx> {
+     | ---------------------------- method `get_element_type` not found for this struct
+
+error[E0599]: no method named `lock` found for struct `once_cell::sync::Lazy` in the current scope
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/context.rs:66:20
+   |
+66 |         GLOBAL_CTX.lock().unwrap_or_else(|e| e.into_inner())
+   |                    ^^^^ method not found in `Lazy<Mutex<Context>>`
+
+error[E0433]: failed to resolve: use of undeclared type `InlineAsmDialect`
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/context.rs:151:35
+    |
+151 |                 dialect.unwrap_or(InlineAsmDialect::ATT).into(),
+    |                                   ^^^^^^^^^^^^^^^^ use of undeclared type `InlineAsmDialect`
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMGetInlineAsm` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/context.rs:143:13
+    |
+143 |             LLVMGetInlineAsm(
+    |             ^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0369]: binary operation `==` cannot be applied to type `Option<TargetData>`
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/execution_engine.rs:93:5
+   |
+90 | #[derive(PartialEq, Eq, Debug)]
+   |          --------- in this derive macro expansion
+...
+93 |     target_data: Option<TargetData>,
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: this error originates in the derive macro `PartialEq` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0599]: no method named `clone` found for reference `&ExecEngineInner<'_>` in the current scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/execution_engine.rs:324:49
+    |
+324 |             _execution_engine: execution_engine.clone(),
+    |                                                 ^^^^^ method not found in `&ExecEngineInner<'_>`
+    |
+    = help: items from traits can only be used if the trait is implemented and in scope
+    = note: the following trait defines an item `clone`, perhaps you need to implement it:
+            candidate #1: `Clone`
+help: trait `Clone` which provides `clone` is implemented but not in scope; perhaps you want to import it
+    |
+1   + use std::clone::Clone;
+    |
+
+error[E0599]: the method `as_ref` exists for enum `Option<TargetData>`, but its trait bounds were not satisfied
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/execution_engine.rs:358:14
+     |
+357  | /         self.target_data
+358  | |             .as_ref()
+     | |             -^^^^^^ method cannot be called on `Option<TargetData>` due to unsatisfied trait bounds
+     | |_____________|
+     |
+     |
+    ::: /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:1249:1
+     |
+1249 |   pub struct TargetData {
+     |   --------------------- doesn't satisfy `TargetData: Sized`
+     |
+     = note: the following trait bounds were not satisfied:
+             `{type error}: Sized`
+             which is required by `TargetData: Sized`
+
+error[E0599]: the method `take` exists for enum `Option<TargetData>`, but its trait bounds were not satisfied
+    --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/execution_engine.rs:441:18
+     |
+440  | /             self.target_data
+441  | |                 .take()
+     | |                 -^^^^ method cannot be called on `Option<TargetData>` due to unsatisfied trait bounds
+     | |_________________|
+     |
+     |
+    ::: /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/targets.rs:1249:1
+     |
+1249 |   pub struct TargetData {
+     |   --------------------- doesn't satisfy `TargetData: Sized`
+     |
+     = note: the following trait bounds were not satisfied:
+             `{type error}: Sized`
+             which is required by `TargetData: Sized`
+             `Option<TargetData>: Iterator`
+             which is required by `&mut Option<TargetData>: Iterator`
+
+error[E0599]: no method named `get_type` found for reference `&fn_value::FunctionValue<'_>` in the current scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/fn_value.rs:548:30
+    |
+548 |         let llvm_type = self.get_type();
+    |                              ^^^^^^^^ method not found in `&FunctionValue<'_>`
+    |
+help: one of the expressions' fields has a method of the same name
+    |
+548 |         let llvm_type = self.fn_value.get_type();
+    |                              +++++++++
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMGetPreviousGlobal` in this scope
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:74:30
+   |
+74 |         let value = unsafe { LLVMGetPreviousGlobal(self.as_value_ref()) };
+   |                              ^^^^^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMGetNextGlobal` in this scope
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:84:30
+   |
+84 |         let value = unsafe { LLVMGetNextGlobal(self.as_value_ref()) };
+   |                              ^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMGetDLLStorageClass` in this scope
+  --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:94:42
+   |
+94 |         let dll_storage_class = unsafe { LLVMGetDLLStorageClass(self.as_value_ref()) };
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMSetDLLStorageClass` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:100:18
+    |
+100 |         unsafe { LLVMSetDLLStorageClass(self.as_value_ref(), dll_storage_class.into()) }
+    |                  ^^^^^^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMGetInitializer` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:104:30
+    |
+104 |         let value = unsafe { LLVMGetInitializer(self.as_value_ref()) };
+    |                              ^^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMSetInitializer` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:115:18
+    |
+115 |         unsafe { LLVMSetInitializer(self.as_value_ref(), value.as_value_ref()) }
+    |                  ^^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMIsThreadLocal` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:119:18
+    |
+119 |         unsafe { LLVMIsThreadLocal(self.as_value_ref()) == 1 }
+    |                  ^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMSetThreadLocal` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:124:18
+    |
+124 |         unsafe { LLVMSetThreadLocal(self.as_value_ref(), is_thread_local as i32) }
+    |                  ^^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMGetThreadLocalMode` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:128:42
+    |
+128 |         let thread_local_mode = unsafe { LLVMGetThreadLocalMode(self.as_value_ref()) };
+    |                                          ^^^^^^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMSetThreadLocalMode` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:141:18
+    |
+141 |         unsafe { LLVMSetThreadLocalMode(self.as_value_ref(), thread_local_mode) }
+    |                  ^^^^^^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMIsDeclaration` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:166:18
+    |
+166 |         unsafe { LLVMIsDeclaration(self.as_value_ref()) == 1 }
+    |                  ^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMIsGlobalConstant` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:196:18
+    |
+196 |         unsafe { LLVMIsGlobalConstant(self.as_value_ref()) == 1 }
+    |                  ^^^^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMSetGlobalConstant` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:200:18
+    |
+200 |         unsafe { LLVMSetGlobalConstant(self.as_value_ref(), is_constant as i32) }
+    |                  ^^^^^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMIsExternallyInitialized` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:204:18
+    |
+204 |         unsafe { LLVMIsExternallyInitialized(self.as_value_ref()) == 1 }
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMSetExternallyInitialized` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:208:18
+    |
+208 |         unsafe { LLVMSetExternallyInitialized(self.as_value_ref(), externally_initialized as i32) }
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: a local variable with a similar name exists: `externally_initialized`
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMSetVisibility` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:212:18
+    |
+212 |         unsafe { LLVMSetVisibility(self.as_value_ref(), visibility.into()) }
+    |                  ^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMGetVisibility` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:216:35
+    |
+216 |         let visibility = unsafe { LLVMGetVisibility(self.as_value_ref()) };
+    |                                   ^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMDeleteGlobal` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:232:9
+    |
+232 |         LLVMDeleteGlobal(self.as_value_ref())
+    |         ^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMGetAlignment` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:240:18
+    |
+240 |         unsafe { LLVMGetAlignment(self.as_value_ref()) }
+    |                  ^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMSetAlignment` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:244:18
+    |
+244 |         unsafe { LLVMSetAlignment(self.as_value_ref(), alignment) }
+    |                  ^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMGetLinkage` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:292:18
+    |
+292 |         unsafe { LLVMGetLinkage(self.as_value_ref()).into() }
+    |                  ^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function, tuple struct or tuple variant `LLVMSetLinkage` in this scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/global_value.rs:296:18
+    |
+296 |         unsafe { LLVMSetLinkage(self.as_value_ref(), linkage.into()) }
+    |                  ^^^^^^^^^^^^^^ not found in this scope
+
+error[E0599]: no method named `get_type` found for struct `fn_value::FunctionValue` in the current scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/callable_value.rs:100:40
+    |
+100 |             Left(function) => function.get_type().as_type_ref(),
+    |                                        ^^^^^^^^ method not found in `FunctionValue<'_>`
+    |
+   ::: /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/fn_value.rs:33:1
+    |
+33  | pub struct FunctionValue<'ctx> {
+    | ------------------------------ method `get_type` not found for this struct
+
+error[E0599]: no method named `get_element_type` found for struct `ptr_type::PointerType` in the current scope
+   --> /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/values/callable_value.rs:101:50
+    |
+101 |             Right(pointer) => pointer.get_type().get_element_type().as_type_ref(),
+    |                                                  ^^^^^^^^^^^^^^^^ method not found in `PointerType<'_>`
+    |
+   ::: /home/soltice/.cargo/registry/src/index.crates.io-6f17d22bba15001f/inkwell-0.4.0/src/types/ptr_type.rs:18:1
+    |
+18  | pub struct PointerType<'ctx> {
+    | ---------------------------- method `get_element_type` not found for this struct
+
+Some errors have detailed explanations: E0046, E0369, E0412, E0425, E0432, E0433, E0599.
+For more information about an error, try `rustc --explain E0046`.
+error: could not compile `inkwell` (lib) due to 231 previous errors
