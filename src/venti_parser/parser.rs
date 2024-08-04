@@ -1,7 +1,9 @@
+use crate::ast::{BinOp, Expr, Statement};
 use crate::lexer::Token;
-use crate::ast::{Expr, BinOp, Statement};
 use std::iter::Peekable;
 use std::vec::IntoIter;
+
+use super::ast::Expr;
 
 pub struct Parser<'a> {
     tokens: Peekable<IntoIter<Token>>,
@@ -49,10 +51,7 @@ impl<'a> Parser<'a> {
         self.advance(); // consume '='
         let value = self.expression();
         self.advance(); // consume ';'
-        Statement::VariableDeclaration {
-            identifier,
-            value,
-        }
+        Statement::VariableDeclaration { identifier, value }
     }
 
     fn print_statement(&mut self) -> Statement {
@@ -131,5 +130,18 @@ impl<'a> Parser<'a> {
             }
             _ => panic!("Unexpected token: {:?}", self.current_token()),
         }
+    }
+
+    fn parse_array(&mut self) -> Expr {
+        self.advance(); // Consume '['
+        let mut elements = Vec::new();
+        while self.current_token() != Some(&Token::RBracket) {
+            element.push(self.expression());
+            if self.current_token() == Sme(&Token::Comma) {
+                self.advance(); // consume ','
+            }
+        }
+        self.advance(); // consume ']'
+        Expr::Array(elements)
     }
 }

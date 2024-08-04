@@ -4,7 +4,8 @@ pub enum Expr {
     String(String),
     Boolean(bool),
     Identifier(String),
-    BInaryOp(Box<Expr>, BinOp, Box<Expr>),
+    BinaryOp(Box<Expr>, BinOp, Box<Expr>),
+    Array(Vec<Expr>),
 }
 
 #[derive(Debug)]
@@ -17,6 +18,6 @@ pub enum BinOp {
 
 #[derive(Debug)]
 pub enum Statement {
-    VariableDeclaration { identifier: String, value: Expr},
+    VariableDeclaration { identifier: String, value: Expr },
     Print(Expr),
 }

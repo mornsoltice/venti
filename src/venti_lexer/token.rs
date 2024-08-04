@@ -3,7 +3,7 @@ use logos::Logos;
 #[derive(Logos, Debug, PartialEq)]
 pub enum Token {
     #[regex(r"[ \t\n\f]+", logos::skip)]
-    #[error]
+    //#[error]
     Error,
 
     #[token("venti")]
@@ -37,6 +37,10 @@ pub enum Token {
     LBrace,
     #[token("}")]
     RBrace,
+    #[token("[")]
+    LBracket,
+    #[token("]")]
+    RBracket,
     #[token(",")]
     Comma,
     #[token(";")]

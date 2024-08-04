@@ -1,13 +1,13 @@
-use inkwell::context::Context;
+use crate::ast::{BinOp, Expr, Statement};
 use inkwell::builder::Builder;
+use inkwell::context::Context;
 use inkwell::execution_engine::ExecutionEngine;
 use inkwell::module::Module;
-use inkwell::OptimizationLevel;
 use inkwell::targets::{InitializationConfig, Target};
 use inkwell::values::BasicValueEnum;
+use inkwell::OptimizationLevel;
 use std::fs::File;
 use std::io::Write;
-use crate::ast::{Expr, BinOp, Statement};
 
 pub struct CodeGen<'ctx> {
     context: &'ctx Context,
@@ -23,7 +23,7 @@ impl<'ctx> CodeGen<'ctx> {
         let execution_engine = module
             .create_jit_execution_engine(OptimizationLevel::None)
             .unwrap();
-        
+
         // Declare printf function
         let i32_type = context.i32_type();
         let i8ptr_type = context.i8_type().ptr_type(inkwell::AddressSpace::Generic);
@@ -46,7 +46,8 @@ impl<'ctx> CodeGen<'ctx> {
         // Print the generated LLVM IR to a file
         let ir = self.module.print_to_string().to_string();
         let mut file = File::create("output.ll").expect("Could not create file");
-        file.write_all(ir.as_bytes()).expect("Could not write to file");
+        file.write_all(ir.as_bytes())
+            .expect("Could not write to file");
     }
 
     fn compile_statement(&self, statement: Statement) {
@@ -58,8 +59,12 @@ impl<'ctx> CodeGen<'ctx> {
             }
             Statement::Print(expr) => {
                 let value = self.compile_expr(expr);
-                let printf = self.module.get_function("printf").expect("Expected 'printf' function");
-                self.builder.build_call(printf, &[value.into()], "printf_call");
+                let printf = self
+                    .module
+                    .get_function("printf")
+                    .expect("Expected 'printf' function");
+                self.builder
+                    .build_call(printf, &[value.into()], "printf_call");
             }
         }
     }
@@ -67,8 +72,17 @@ impl<'ctx> CodeGen<'ctx> {
     fn compile_expr(&self, expr: Expr) -> BasicValueEnum<'ctx> {
         match expr {
             Expr::Number(n) => self.context.i64_type().const_int(n as u64, false).into(),
-            Expr::String(s) => self.builder.build_global_string_ptr(&s, "str").as_pointer_value().into(),
-            Expr::Identifier(id) => self.module.get_global(&id).unwrap().as_pointer_value().into(),
+            Expr::String(s) => self
+                .builder
+                .build_global_string_ptr(&s, "str")
+                .as_pointer_value()
+                .into(),
+            Expr::Identifier(id) => self
+                .module
+                .get_global(&id)
+                .unwrap()
+                .as_pointer_value()
+                .into(),
             Expr::BinaryOp(left, op, right) => {
                 let left = self.compile_expr(*left).into_int_value();
                 let right = self.compile_expr(*right).into_int_value();
@@ -76,8 +90,25 @@ impl<'ctx> CodeGen<'ctx> {
                     BinOp::Add => self.builder.build_int_add(left, right, "tmpadd").into(),
                     BinOp::Subtract => self.builder.build_int_sub(left, right, "tmpsub").into(),
                     BinOp::Multiply => self.builder.build_int_mul(left, right, "tmpmul").into(),
-                    BinOp::Divide => self.builder.build_int_signed_div(left, right, "tmpdiv").into(),
+                    BinOp::Divide => self
+                        .builder
+                        .build_int_signed_div(left, right, "tmpdiv")
+                        .into(),
                 }
+            }
+            Expr::Array(elements) => {
+                let array_type = self.context.i32_type().array_type(elements.len() as u32);
+                let array_alloca = self.builder.build_alloca(array_type, "array");
+                for (i, element) in elements.into_iter().enumerate() {
+                    let value = self.compile_expr(element).into_int_value();
+                    let index = self.context.i32_type().const_int(i as u64, false);
+                    let ptr = unsafe {
+                        self.builder
+                            .build_gep(array_alloca, &[index], "element_ptr")
+                    };
+                    self.builder.build_store(ptr, value);
+                }
+                array_alloca.into()
             }
             _ => panic!("Unsupported expression"),
         }
