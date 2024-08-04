@@ -1,4 +1,5 @@
 use crate::ast::{BinOp, Expr, Statement};
+use crate::errors::VentiError;
 use inkwell::builder::Builder;
 use inkwell::context::Context;
 use inkwell::execution_engine::ExecutionEngine;
@@ -38,55 +39,57 @@ impl<'ctx> CodeGen<'ctx> {
         }
     }
 
-    pub fn compile(&self, statements: Vec<Statement>) {
+    pub fn compile(&self, statements: Vec<Statement>) -> Result<(), VentiError> {
         for statement in statements {
-            self.compile_statement(statement);
+            self.compile_statement(statement)?;
         }
 
         // Print the generated LLVM IR to a file
         let ir = self.module.print_to_string().to_string();
-        let mut file = File::create("output.ll").expect("Could not create file");
+        let mut file = File::create("output.ll").map_err(|e| VentiError::IOError(e.to_string()))?;
         file.write_all(ir.as_bytes())
-            .expect("Could not write to file");
+            .map_err(|e| VentiError::IOError(e.to_string()))?;
+        Ok(())
     }
 
-    fn compile_statement(&self, statement: Statement) {
+    fn compile_statement(&self, statement: Statement) -> Result<(), VentiError> {
         match statement {
             Statement::VariableDeclaration { identifier, value } => {
-                let value = self.compile_expr(value);
+                let value = self.compile_expr(value)?;
                 let global = self.module.add_global(value.get_type(), None, &identifier);
                 global.set_initializer(&value);
+                Ok(())
             }
             Statement::Print(expr) => {
-                let value = self.compile_expr(expr);
-                let printf = self
-                    .module
-                    .get_function("printf")
-                    .expect("Expected 'printf' function");
+                let value = self.compile_expr(expr)?;
+                let printf = self.module.get_function("printf").ok_or_else(|| {
+                    VentiError::CodegenError("Expected 'printf' function".to_string())
+                })?;
                 self.builder
                     .build_call(printf, &[value.into()], "printf_call");
+                Ok(())
             }
         }
     }
 
-    fn compile_expr(&self, expr: Expr) -> BasicValueEnum<'ctx> {
+    fn compile_expr(&self, expr: Expr) -> Result<BasicValueEnum<'ctx>, VentiError> {
         match expr {
-            Expr::Number(n) => self.context.i64_type().const_int(n as u64, false).into(),
-            Expr::String(s) => self
+            Expr::Number(n) => Ok(self.context.i64_type().const_int(n as u64, false).into()),
+            Expr::String(s) => Ok(self
                 .builder
                 .build_global_string_ptr(&s, "str")
                 .as_pointer_value()
-                .into(),
-            Expr::Identifier(id) => self
-                .module
-                .get_global(&id)
-                .unwrap()
-                .as_pointer_value()
-                .into(),
+                .into()),
+            Expr::Identifier(id) => {
+                let global = self.module.get_global(&id).ok_or_else(|| {
+                    VentiError::CodegenError(format!("Undefined variable '{}'", id))
+                })?;
+                Ok(global.as_pointer_value().into())
+            }
             Expr::BinaryOp(left, op, right) => {
-                let left = self.compile_expr(*left).into_int_value();
-                let right = self.compile_expr(*right).into_int_value();
-                match op {
+                let left = self.compile_expr(*left)?.into_int_value();
+                let right = self.compile_expr(*right)?.into_int_value();
+                let result = match op {
                     BinOp::Add => self.builder.build_int_add(left, right, "tmpadd").into(),
                     BinOp::Subtract => self.builder.build_int_sub(left, right, "tmpsub").into(),
                     BinOp::Multiply => self.builder.build_int_mul(left, right, "tmpmul").into(),
@@ -94,13 +97,14 @@ impl<'ctx> CodeGen<'ctx> {
                         .builder
                         .build_int_signed_div(left, right, "tmpdiv")
                         .into(),
-                }
+                };
+                Ok(result)
             }
             Expr::Array(elements) => {
                 let array_type = self.context.i32_type().array_type(elements.len() as u32);
                 let array_alloca = self.builder.build_alloca(array_type, "array");
                 for (i, element) in elements.into_iter().enumerate() {
-                    let value = self.compile_expr(element).into_int_value();
+                    let value = self.compile_expr(element)?.into_int_value();
                     let index = self.context.i32_type().const_int(i as u64, false);
                     let ptr = unsafe {
                         self.builder
@@ -108,9 +112,12 @@ impl<'ctx> CodeGen<'ctx> {
                     };
                     self.builder.build_store(ptr, value);
                 }
-                array_alloca.into()
+                Ok(array_alloca.into())
             }
-            _ => panic!("Unsupported expression"),
+            _ => Err(VentiError::CodegenError(
+                "Unsupported expression".to_string(),
+            )),
         }
     }
 }
+
