@@ -1,10 +1,10 @@
-use crate::ast::{BinOp, Expr, Statement};
 use crate::errors::VentiError;
+use crate::venti_parser::ast::{BinOp, Expr, Statement};
+use async_std::task;
 use inkwell::builder::Builder;
 use inkwell::context::Context;
 use inkwell::execution_engine::ExecutionEngine;
 use inkwell::module::Module;
-use inkwell::targets::{InitializationConfig, Target};
 use inkwell::values::BasicValueEnum;
 use inkwell::OptimizationLevel;
 use std::fs::File;
@@ -27,7 +27,9 @@ impl<'ctx> CodeGen<'ctx> {
 
         // Declare printf function
         let i32_type = context.i32_type();
-        let i8ptr_type = context.i8_type().ptr_type(inkwell::AddressSpace::Generic);
+        let i8ptr_type = context
+            .i8_type()
+            .ptr_type(inkwell::AddressSpace::Generic.into());
         let printf_type = i32_type.fn_type(&[i8ptr_type.into()], true);
         module.add_function("printf", printf_type, None);
 
@@ -69,7 +71,28 @@ impl<'ctx> CodeGen<'ctx> {
                     .build_call(printf, &[value.into()], "printf_call");
                 Ok(())
             }
+            Statement::AsyncFunction { identifier, body } => {
+                self.compile_async_function(identifier, body)
+            }
         }
+    }
+
+    fn compile_async_function(
+        &self,
+        identifier: String,
+        body: Vec<Statement>,
+    ) -> Result<(), VentiError> {
+        let func_type = self.context.void_type().fn_type(&[], false);
+        let function = self.module.add_function(&identifier, func_type, None);
+        let entry = self.context.append_basic_block(function, "entry");
+        self.builder.position_at_end(entry);
+
+        for statement in body {
+            self.compile_statement(statement)?;
+        }
+
+        self.builder.build_return(None);
+        Ok(())
     }
 
     fn compile_expr(&self, expr: Expr) -> Result<BasicValueEnum<'ctx>, VentiError> {
@@ -90,15 +113,12 @@ impl<'ctx> CodeGen<'ctx> {
                 let left = self.compile_expr(*left)?.into_int_value();
                 let right = self.compile_expr(*right)?.into_int_value();
                 let result = match op {
-                    BinOp::Add => self.builder.build_int_add(left, right, "tmpadd").into(),
-                    BinOp::Subtract => self.builder.build_int_sub(left, right, "tmpsub").into(),
-                    BinOp::Multiply => self.builder.build_int_mul(left, right, "tmpmul").into(),
-                    BinOp::Divide => self
-                        .builder
-                        .build_int_signed_div(left, right, "tmpdiv")
-                        .into(),
+                    BinOp::Add => self.builder.build_int_add(left, right, "tmpadd"),
+                    BinOp::Subtract => self.builder.build_int_sub(left, right, "tmpsub"),
+                    BinOp::Multiply => self.builder.build_int_mul(left, right, "tmpmul"),
+                    BinOp::Divide => self.builder.build_int_signed_div(left, right, "tmpdiv"),
                 };
-                Ok(result)
+                Ok(result.into())
             }
             Expr::Array(elements) => {
                 let array_type = self.context.i32_type().array_type(elements.len() as u32);
@@ -108,16 +128,24 @@ impl<'ctx> CodeGen<'ctx> {
                     let index = self.context.i32_type().const_int(i as u64, false);
                     let ptr = unsafe {
                         self.builder
-                            .build_gep(array_alloca, &[index], "element_ptr")
+                            .build_gep(array_alloca, &[index.into()], "element_ptr")
                     };
                     self.builder.build_store(ptr, value);
                 }
                 Ok(array_alloca.into())
+            }
+            Expr::Await(inner_expr) => {
+                let inner_value = self.compile_expr(*inner_expr)?;
+                let async_task = self.async_task(inner_value);
+                Ok(async_task.into())
             }
             _ => Err(VentiError::CodegenError(
                 "Unsupported expression".to_string(),
             )),
         }
     }
-}
 
+    fn async_task(&self, value: BasicValueEnum<'ctx>) -> BasicValueEnum<'ctx> {
+        task::block_on(async { value })
+    }
+}

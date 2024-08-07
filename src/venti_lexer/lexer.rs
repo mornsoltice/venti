@@ -13,12 +13,10 @@ impl<'a> Lexer<'a> {
         }
     }
 
-    pub fn next_token(&mut self) -> Result<Token, VentiError> {
+    pub fn next_token(&mut self) -> Option<Result<Token, ()>> {
         match self.lexer.next() {
-            Some(token) => Ok(token),
-            None => Err(VentiError::SyntaxError(
-                "Unexpected end of input".to_string(),
-            )),
+            Some(token) => Some(Ok(token)),
+            None => None,
         }
     }
 }

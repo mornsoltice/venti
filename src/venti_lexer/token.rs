@@ -57,4 +57,8 @@ pub enum Token {
     While,
     #[token("printventi")]
     Print,
+    #[token("async")]
+    Async,
+    #[token("await")]
+    Await,
 }

@@ -6,6 +6,8 @@ pub enum Expr {
     Identifier(String),
     BinaryOp(Box<Expr>, BinOp, Box<Expr>),
     Array(Vec<Expr>),
+    Async(Box<Expr>),
+    Await(Box<Expr>),
 }
 
 #[derive(Debug)]
@@ -18,6 +20,13 @@ pub enum BinOp {
 
 #[derive(Debug)]
 pub enum Statement {
-    VariableDeclaration { identifier: String, value: Expr },
+    VariableDeclaration {
+        identifier: String,
+        value: Expr,
+    },
     Print(Expr),
+    AsyncFunction {
+        identifier: String,
+        body: Vec<Statement>,
+    },
 }

@@ -3,6 +3,7 @@ mod errors;
 mod venti_lexer;
 mod venti_parser;
 
+use crate::codegen::codegen::CodeGen;
 use crate::errors::VentiError;
 use clap::{Arg, Command};
 use std::fs;
@@ -11,7 +12,7 @@ fn main() -> Result<(), VentiError> {
     let matches = Command::new("Venti")
         .version("0.1.0")
         .author("k m nandyka")
-        .about("simple programming language with rust, i made it because i love venti")
+        .about("Simple programming language with Rust, because I love Venti")
         .arg(
             Arg::new("INPUT")
                 .help("Sets the input file to use")
@@ -21,12 +22,12 @@ fn main() -> Result<(), VentiError> {
         .get_matches();
 
     let input = matches.get_one::<String>("INPUT").unwrap();
-    let source = fs::read_to_string(input).expect("Could not read file");
+    let source = fs::read_to_string(input).map_err(|e| VentiError::IOError(e.to_string()))?;
 
     let mut lexer = venti_lexer::lexer::Lexer::new(&source);
     let mut tokens = Vec::new();
-    while let Some(token) = lexer.next_token()? {
-        tokens.push(token);
+    while let Some(token) = lexer.next_token() {
+        tokens.push(token?);
     }
     println!("Tokens: {:?}", tokens);
 
@@ -35,8 +36,9 @@ fn main() -> Result<(), VentiError> {
     println!("AST: {:?}", ast);
 
     let context = inkwell::context::Context::create();
-    let codegen = codegen::CodeGen::new(&context);
+    let codegen = CodeGen::new(&context);
     codegen.compile(ast)?;
 
     Ok(())
 }
+

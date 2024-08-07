@@ -1,15 +1,14 @@
-use crate::ast::{BinOp, Expr, Statement};
+use crate::venti_parser::ast::{BinOp, Expr, Statement};
+use crate::venti_lexer::token::Token;
 use crate::errors::VentiError;
-use crate::lexer::Token;
 use std::iter::Peekable;
-
 use std::vec::IntoIter;
 
-pub struct Parser<'a> {
+pub struct Parser {
     tokens: Peekable<IntoIter<Token>>,
 }
 
-impl<'a> Parser<'a> {
+impl Parser {
     pub fn new(tokens: Vec<Token>) -> Self {
         Parser {
             tokens: tokens.into_iter().peekable(),
@@ -20,7 +19,7 @@ impl<'a> Parser<'a> {
         self.tokens.next();
     }
 
-    fn current_token(&self) -> Option<&Token> {
+    fn current_token(&mut self) -> Option<&Token> {
         self.tokens.peek()
     }
 
@@ -36,25 +35,25 @@ impl<'a> Parser<'a> {
         match self.current_token() {
             Some(Token::Venti) => self.variable_declaration(),
             Some(Token::Print) => self.print_statement(),
-            _ => Err(VentiError::SyntaxError(format!(
-                "Unexpected token: {:?}",
-                self.current_token()
-            ))),
+            _ => Err(VentiError::SyntaxError(format!("Unexpected token: {:?}", self.current_token()))),
         }
     }
 
     fn variable_declaration(&mut self) -> Result<Statement, VentiError> {
         self.advance(); // consume 'venti'
-        let identifier = if let Some(Token::Identifier(name)) = self.current_token() {
-            name.clone()
+        let identifier = if let Some(Token::Identifier) = self.current_token() {
+            self.advance(); // consume identifier
+            if let Some(Token::Equals) = self.current_token() {
+                self.advance(); // consume '='
+                let value = self.expression()?;
+                self.advance(); // consume ';'
+                Ok(Statement::VariableDeclaration { identifier: "identifier".to_string(), value })
+            } else {
+                Err(VentiError::SyntaxError("Expected '='".to_string()))
+            }
         } else {
-            return Err(VentiError::SyntaxError("Expected identifier".to_string()));
-        };
-        self.advance(); // consume identifier
-        self.advance(); // consume '='
-        let value = self.expression()?;
-        self.advance(); // consume ';'
-        Ok(Statement::VariableDeclaration { identifier, value })
+            Err(VentiError::SyntaxError("Expected identifier".to_string()))
+        }
     }
 
     fn print_statement(&mut self) -> Result<Statement, VentiError> {
@@ -110,25 +109,30 @@ impl<'a> Parser<'a> {
 
     fn primary(&mut self) -> Result<Expr, VentiError> {
         match self.current_token() {
-            Some(Token::NumberLiteral(value)) => {
-                let number = value
-                    .parse()
-                    .map_err(|_| VentiError::SyntaxError("Invalid number".to_string()))?;
-                self.advance();
-                Ok(Expr::Number(number))
+            Some(Token::NumberLiteral) => {
+                if let Some(Token::NumberLiteral(value)) = self.advance_and_get() {
+                    let number = value.parse().map_err(|_| VentiError::SyntaxError("Invalid number".to_string()))?;
+                    Ok(Expr::Number(number))
+                } else {
+                    Err(VentiError::SyntaxError("Expected number".to_string()))
+                }
             }
-            Some(Token::StringLiteral(value)) => {
-                let string = value.clone();
-                self.advance();
-                Ok(Expr::String(string))
+            Some(Token::StringLiteral) => {
+                if let Some(Token::StringLiteral(value)) = self.advance_and_get() {
+                    Ok(Expr::String(value))
+                } else {
+                    Err(VentiError::SyntaxError("Expected string".to_string()))
+                }
             }
-            Some(Token::Identifier(name)) => {
-                let identifier = name.clone();
-                self.advance();
-                Ok(Expr::Identifier(identifier))
+            Some(Token::Identifier) => {
+                if let Some(Token::Identifier(name)) = self.advance_and_get() {
+                    Ok(Expr::Identifier(name))
+                } else {
+                    Err(VentiError::SyntaxError("Expected identifier".to_string()))
+                }
             }
             Some(Token::LParen) => {
-                self.advance();
+                self.advance(); // consume '('
                 let expr = self.expression()?;
                 if self.current_token() == Some(&Token::RParen) {
                     self.advance(); // consume ')'
@@ -138,10 +142,7 @@ impl<'a> Parser<'a> {
                 }
             }
             Some(Token::LBracket) => self.parse_array(),
-            _ => Err(VentiError::SyntaxError(format!(
-                "Unexpected token: {:?}",
-                self.current_token()
-            ))),
+            _ => Err(VentiError::SyntaxError(format!("Unexpected token: {:?}", self.current_token()))),
         }
     }
 
@@ -157,5 +158,9 @@ impl<'a> Parser<'a> {
         self.advance(); // consume ']'
         Ok(Expr::Array(elements))
     }
-}
 
+    fn advance_and_get(&mut self) -> Option<Token> {
+        self.advance();
+        self.current_token().cloned()
+    }
+}
