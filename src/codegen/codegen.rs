@@ -128,7 +128,7 @@ impl<'ctx> CodeGen<'ctx> {
                     let index = self.context.i32_type().const_int(i as u64, false);
                     let ptr = unsafe {
                         self.builder
-                            .build_gep(array_alloca, &[index.into()], "element_ptr")
+                            .build_gep(array_alloca, &[index.into()], "element_ptr", false)
                     };
                     self.builder.build_store(ptr, value);
                 }

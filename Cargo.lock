@@ -826,7 +826,6 @@ dependencies = [
  "async-std",
  "clap",
  "inkwell",
- "llvm-sys",
  "logos",
 ]
 
