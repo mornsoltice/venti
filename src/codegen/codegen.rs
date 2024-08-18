@@ -62,6 +62,18 @@ impl<'ctx> CodeGen<'ctx> {
                 global.set_initializer(&value);
                 Ok(())
             }
+            Statement::FunctionCall { identifier, args } => {
+                let function = self.module.get_function(&identifier).ok_or_else(|| {
+                    VentiError::CodegenError(format!("Undefined function '{}'", identifier))
+                })?;
+                let compiled_args = args
+                    .into_iter()
+                    .map(|arg| self.compile_expr(arg))
+                    .collect::<Result<Vec<_>, _>>()?;
+                self.builder
+                    .build_call(function, &compiled_args, "call_func");
+                Ok(())
+            }
             Statement::Print(expr) => {
                 let value = self.compile_expr(expr)?;
                 let printf = self.module.get_function("printf").ok_or_else(|| {

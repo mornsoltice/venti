@@ -34,6 +34,7 @@ impl Parser {
     fn statement(&mut self) -> Result<Statement, VentiError> {
         match self.current_token() {
             Some(Token::Venti) => self.variable_declaration(),
+            Some(Token::Venti) => self.function_or_variable(),
             Some(Token::Print) => self.print_statement(),
             _ => Err(VentiError::SyntaxError(format!(
                 "Unexpected token: {:?}",
@@ -182,5 +183,26 @@ impl Parser {
     fn advance_and_get(&mut self) -> Option<Token> {
         self.advance();
         self.current_token().cloned()
+    }
+
+    fn function_or_variable(&mut self) -> Result<Statement, VentiError> {
+        if let Some(Token::Identifier) = self.current_token() {
+            let identifier = "some_identifier".to_string(); // Placeholder for actual identifier
+
+            self.advance();
+            if let Some(Token::LParen) = self.current_token() {
+                self.advance(); // Consume '('
+                                // Parse function call arguments gere
+                let args = Vec::new(); // Placeholder for actual args parsing
+                if let Some(Token::RParen) = self.current_token() {
+                    self.advance();
+                    return Ok(Statement::FunctionCall { identifier, args });
+                } else {
+                }
+            }
+            Err(VentiError::SyntaxError(
+                "Invalid function or variable statement".to_string(),
+            ))
+        }
     }
 }
