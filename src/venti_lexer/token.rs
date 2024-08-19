@@ -69,3 +69,4 @@ pub enum Token {
     #[token("bool")]
     Bool,
 }
+

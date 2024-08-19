@@ -1,4 +1,11 @@
 #[derive(Debug)]
+pub enum VarType {
+    Int,
+    Float,
+    Bool,
+}
+
+#[derive(Debug)]
 pub enum Expr {
     Number(i64),
     String(String),

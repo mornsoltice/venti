@@ -5,7 +5,8 @@ use inkwell::builder::Builder;
 use inkwell::context::Context;
 use inkwell::execution_engine::ExecutionEngine;
 use inkwell::module::Module;
-use inkwell::values::BasicValueEnum;
+use inkwell::types::{BasicTypeEnum, IntType};
+use inkwell::values::{BasicValueEnum, FloatValue, IntValue};
 use inkwell::OptimizationLevel;
 use std::fs::File;
 use std::io::Write;
@@ -110,6 +111,8 @@ impl<'ctx> CodeGen<'ctx> {
     fn compile_expr(&self, expr: Expr) -> Result<BasicValueEnum<'ctx>, VentiError> {
         match expr {
             Expr::Number(n) => Ok(self.context.i64_type().const_int(n as u64, false).into()),
+            Expr::Float(f) => Ok(self.context.f64_type().const_float(f).into()),
+            Expr::Boolean(b) => Ok(self.context.i1_type().const_int(b as u64, false).into()),
             Expr::String(s) => Ok(self
                 .builder
                 .build_global_string_ptr(&s, "str")
@@ -158,6 +161,8 @@ impl<'ctx> CodeGen<'ctx> {
     }
 
     fn async_task(&self, value: BasicValueEnum<'ctx>) -> BasicValueEnum<'ctx> {
-        task::block_on(async { value })
+        // Placeholder: In actual implementation, handle async task creation
+        value
     }
 }
+
