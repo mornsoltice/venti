@@ -9,17 +9,17 @@ pub enum Token {
     #[token("venti")]
     Venti,
 
-    #[regex(r"[a-zA-Z_][a-zA-Z0-9_]*")]
-    Identifier,
+    #[regex(r"[a-zA-Z_][a-zA-Z0-9_]*", |lex| lex.slice().to_string())]
+    Identifier(String),
 
-    #[regex(r#""[^"]*""#)]
-    StringLiteral,
+    #[regex(r#""[^"]*""#, |lex| lex.slice().to_string())]
+    StringLiteral(String),
 
-    #[regex(r"[0-9]+")]
-    NumberLiteral,
+    #[regex(r"[0-9]+", |lex| lex.slice().to_string())]
+    NumberLiteral(i64),
 
-    #[regex(r"true|false")]
-    BooleanLiteral,
+    #[regex(r"true|false", |lex| lex.slice().to_string())]
+    BooleanLiteral(bool),
 
     #[token("+")]
     Plus,
