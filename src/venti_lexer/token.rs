@@ -61,4 +61,11 @@ pub enum Token {
     Async,
     #[token("await")]
     Await,
+
+    #[token("int")]
+    Int,
+    #[token("float")]
+    Float,
+    #[token("bool")]
+    Bool,
 }
