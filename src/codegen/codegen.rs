@@ -18,6 +18,70 @@ pub struct CodeGen<'ctx> {
     execution_engine: ExecutionEngine<'ctx>,
 }
 
+/*
+The CodeGen struct is responsible for generating LLVM IR code from a parsed abstract syntax tree (AST). It uses the inkwell library to interact with the LLVM backend, allowing the program to be compiled and executed dynamically.
+
+Fields:
+*    context: A reference to the LLVM Context, which manages the memory and lifetime of LLVM objects.
+*    builder: A Builder used to generate LLVM instructions.
+*    module: A Module that contains the generated code.
+*    execution_engine: An ExecutionEngine that allows the JIT (Just-In-Time) compilation and execution of the generated code.
+*    Methods: new(context: &'ctx Context) -> Self
+*    Creates a new CodeGen instance. This method initializes the LLVM Module, Builder, and ExecutionEngine. It also declares the   * printf function for use in generated code.
+
+Parameters:
+
+*   context: A reference to the LLVM context.
+Returns:
+
+*   A new instance of CodeGen.
+*   compile(&self, statements: Vec<Statement>) -> Result<(), VentiError>
+*    Compiles a vector of Statement AST nodes into LLVM IR. The generated code is then written to a file named output.ll.
+
+Parameters:
+
+*   statements: A vector of Statement nodes representing the program to be compiled.
+Returns:
+Ok(()) on success, or an error (VentiError) if something goes wrong during compilation.
+compile_statement(&self, statement: Statement) -> Result<(), VentiError>
+Compiles a single Statement into LLVM IR.
+
+Parameters:
+
+statement: The Statement node to be compiled.
+
+Returns:
+Ok(()) on success, or an error (VentiError) if the statement cannot be compiled.
+compile_async_function(&self, identifier: String, body: Vec<Statement>) -> Result<(), VentiError>
+Compiles an asynchronous function by generating LLVM code for the function body and appending it to the module.
+
+Parameters:
+
+identifier: The name of the async function.
+body: A vector of Statement nodes representing the function body.
+
+Returns:
+Ok(()) on success, or an error (VentiError) if the function cannot be compiled.
+compile_expr(&self, expr: Expr) -> Result<BasicValueEnum<'ctx>, VentiError>
+Compiles an expression (Expr) into LLVM IR, returning the generated value.
+
+Parameters:
+
+expr: The expression node to be compiled.
+Returns:
+
+A BasicValueEnum containing the compiled value, or an error (VentiError) if the expression cannot be compiled.
+async_task(&self, value: BasicValueEnum<'ctx>) -> BasicValueEnum<'ctx>
+A placeholder function for handling asynchronous tasks. In an actual implementation, this function would handle the creation and execution of asynchronous tasks.
+
+Parameters:
+
+value: The value to be handled asynchronously.
+Returns:
+
+The value as a BasicValueEnum. (In the current implementation, this function simply returns the input value.)
+*/
+
 impl<'ctx> CodeGen<'ctx> {
     pub fn new(context: &'ctx Context) -> Self {
         let module = context.create_module("venti");
@@ -165,4 +229,3 @@ impl<'ctx> CodeGen<'ctx> {
         value
     }
 }
-
