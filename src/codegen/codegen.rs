@@ -68,6 +68,7 @@ Compiles an expression (Expr) into LLVM IR, returning the generated value.
 Parameters:
 
 expr: The expression node to be compiled.
+
 Returns:
 
 A BasicValueEnum containing the compiled value, or an error (VentiError) if the expression cannot be compiled.
@@ -77,6 +78,7 @@ A placeholder function for handling asynchronous tasks. In an actual implementat
 Parameters:
 
 value: The value to be handled asynchronously.
+
 Returns:
 
 The value as a BasicValueEnum. (In the current implementation, this function simply returns the input value.)
