@@ -27,7 +27,7 @@ Fields:
 *    module: A Module that contains the generated code.
 *    execution_engine: An ExecutionEngine that allows the JIT (Just-In-Time) compilation and execution of the generated code.
 *    Methods: new(context: &'ctx Context) -> Self
-*    Creates a new CodeGen instance. This method initializes the LLVM Module, Builder, and ExecutionEngine. It also declares the   * printf function for use in generated code.
+*    Creates a new CodeGen instance. This method initializes the LLVM Module, Builder, and ExecutionEngine. It also declares the printf function for use in generated code.
 
 Parameters:
 
