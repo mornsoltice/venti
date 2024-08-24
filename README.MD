@@ -1,5 +1,3 @@
-![venti](venti.png)
-
 # Venti
 venti is an simple programming languange that made with rust, i made it because i love venti lol
 
