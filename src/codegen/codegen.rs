@@ -51,9 +51,9 @@ Parameters:
 statement: The Statement node to be compiled.
 
 Returns:
-Ok(()) on success, or an error (VentiError) if the statement cannot be compiled.
-compile_async_function(&self, identifier: String, body: Vec<Statement>) -> Result<(), VentiError>
-Compiles an asynchronous function by generating LLVM code for the function body and appending it to the module.
+* Ok(()) on success, or an error (VentiError) if the statement cannot be compiled.
+* compile_async_function(&self, identifier: String, body: Vec<Statement>) -> Result<(), VentiError>
+* Compiles an asynchronous function by generating LLVM code for the function body and appending it to the module.
 
 Parameters:
 

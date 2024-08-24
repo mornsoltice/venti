@@ -1,2 +1,42 @@
-venti contohString = "i love venti";
+venti contohString = "I Love Venti";
+venti contohInteger = 69;
+venti iLoveVenti = true;
+
 printventi(contohString);
+printventi(contohInteger);
+printventi(iLoveVenti);
+
+venti myArray = ["i", "love", "venti"];
+printventi(myArray);
+
+venti myNestedArray = [[1, 2], [3, 4], [5, 6]];
+printventi(myNestedArray);
+
+venti operasi = (4 + 4 * 2)/2;
+print(operasi);
+
+venti faktorial = factorial_venti(5);
+print(faktorial);
+
+for_venti i in 100 {
+    venti myString = "I Love Venti 100x";
+    print(myString);
+}
+
+funcVenti myFunction(a, b) {
+    venti result = a + b;
+    printventi(result);
+}
+
+venti x = 10;
+venti y = 20;
+myFunction(x, y);
+
+venti x = 1;
+if_venti(x > 1) {
+    venti result = "i love venti";
+    printventi(result);
+} else_venti {
+    venti result = "i really love venti";
+    printventi(result);
+}
