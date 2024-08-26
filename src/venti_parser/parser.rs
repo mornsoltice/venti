@@ -4,25 +4,48 @@ use crate::venti_parser::ast::{BinOp, Expr, Statement};
 use std::iter::Peekable;
 use std::vec::IntoIter;
 
+/// A Parser For the Venti Programming Lang
+///
+/// The `parser` is responsible for converting a sequence of tokens into an AST
 pub struct Parser {
     tokens: Peekable<IntoIter<Token>>,
 }
 
 impl Parser {
+    /// Crate a new `Parser` with the given tokens
+    ///
+    /// # Arguments
+    ///
+    /// * `tokens` - A vector of `Token` objects representing the token to parse
+    ///
+    /// # Returns
+    ///
+    /// A new instance of `Parser`.
     pub fn new(tokens: Vec<Token>) -> Self {
         Parser {
             tokens: tokens.into_iter().peekable(),
         }
     }
 
+    /// Advance the current token without advancing the iterator
     fn advance(&mut self) {
         self.tokens.next();
     }
 
+    /// Returns the current token without advancing the iterator
+    ///
+    /// # Returns
+    ///
+    /// An `Option` containing a reference to the current `Token`, or `None` if there are no more tokens
     fn current_token(&mut self) -> Option<&Token> {
         self.tokens.peek()
     }
 
+    /// Parses the entire input and produces a vector of a statements
+    ///
+    /// # Returns
+    ///
+    /// A `Result` containing either a vector of `Statement` objects or a `VentiError` if parsing fails.
     pub fn parse(&mut self) -> Result<Vec<Statement>, VentiError> {
         let mut statements = Vec::new();
         while self.current_token().is_some() {
@@ -31,6 +54,11 @@ impl Parser {
         Ok(statements)
     }
 
+    /// Parses a single statement
+    ///
+    /// # Returns
+    ///
+    /// A `Result` containing a `Statement` or a `VentiError` if the statement is invalid.
     fn statement(&mut self) -> Result<Statement, VentiError> {
         match self.current_token() {
             Some(Token::Venti) => {
@@ -49,6 +77,11 @@ impl Parser {
         }
     }
 
+    /// Parses a variable declaration statement.
+    ///
+    /// # Returns
+    ///
+    /// A `Result` containing a `Statement::VariableDeclaration` or a `VentiError` if the declaration is invalid.
     fn variable_declaration(&mut self) -> Result<Statement, VentiError> {
         // Match the identifier
         let identifier = if let Some(Token::Identifier(id)) = self.current_token() {
@@ -85,6 +118,11 @@ impl Parser {
         }
     }
 
+    /// Parses a print statement.
+    ///
+    /// # Returns
+    ///
+    /// A `Result` containing a `Statement::Print` or a `VentiError` if the print statement is invalid.
     fn print_statement(&mut self) -> Result<Statement, VentiError> {
         // Parse the expression to be printed
         let value = self.expression()?;
@@ -100,10 +138,20 @@ impl Parser {
         }
     }
 
+    /// Parses an expression, starting with the term.
+    ///
+    /// # Returns
+    ///
+    /// A `Result` containing an `Expr` or a `VentiError` if the expression is invalid.
     fn expression(&mut self) -> Result<Expr, VentiError> {
         self.term()
     }
 
+    /// Parses a term, which may include addition and subtraction.
+    ///
+    /// # Returns
+    ///
+    /// A `Result` containing an `Expr` or a `VentiError` if the term is invalid.
     fn term(&mut self) -> Result<Expr, VentiError> {
         let mut left = self.factor()?;
         while let Some(token) = self.current_token() {
@@ -124,6 +172,11 @@ impl Parser {
         Ok(left)
     }
 
+    /// Parses a factor, which may include multiplication and division.
+    ///
+    /// # Returns
+    ///
+    /// A `Result` containing an `Expr` or a `VentiError` if the factor is invalid.
     fn factor(&mut self) -> Result<Expr, VentiError> {
         let mut left = self.primary()?;
         while let Some(token) = self.current_token() {
@@ -144,6 +197,11 @@ impl Parser {
         Ok(left)
     }
 
+    /// Parses a primary expression, which can be a number, string, identifier, or parenthesized expression.
+    ///
+    /// # Returns
+    ///
+    /// A `Result` containing an `Expr` or a `VentiError` if the primary expression is invalid.
     fn primary(&mut self) -> Result<Expr, VentiError> {
         match self.current_token() {
             Some(Token::NumberLiteral(n)) => {
@@ -176,6 +234,11 @@ impl Parser {
         }
     }
 
+    /// Parses an array literal.
+    ///
+    /// # Returns
+    ///
+    /// A `Result` containing an `Expr::Array` or a `VentiError` if the array is invalid.
     fn parse_array(&mut self) -> Result<Expr, VentiError> {
         self.advance(); // consume '['
         let mut elements = Vec::new();
@@ -191,6 +254,11 @@ impl Parser {
         Ok(Expr::Array(elements))
     }
 
+    /// Parses either a function call or a variable assignment.
+    ///
+    /// # Returns
+    ///
+    /// A `Result` containing either a `Statement::FunctionCall` or `Statement::VariableAssignment`, or a `VentiError` if invalid.
     fn function_or_variable(&mut self) -> Result<Statement, VentiError> {
         let identifier = if let Some(Token::Identifier(id)) = self.current_token() {
             id.clone()
